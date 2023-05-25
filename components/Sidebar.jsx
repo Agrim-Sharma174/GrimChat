@@ -3,11 +3,18 @@ import { FiMenu } from "react-icons/fi";
 import { AiOutlineSearch } from "react-icons/ai";
 import { IoMdClose } from "react-icons/io";
 import Image from "next/image";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "@/firebase";
+import { signOut } from "firebase/auth";
 // import Card from "./Card";
  
 const Sidebar = () => {
 
     const [search, setSearch] = useState("");
+    const[user, loading] = useAuthState(auth);
+    const Logout = async() => {
+        await signOut(auth);
+     }
     return (
         <div className="w-[40%] h-screen p-5 bg-[#191919]">
             <div className="flex items-center w-full space-x-4">
@@ -17,16 +24,16 @@ const Sidebar = () => {
                         <div className="drop-down w-[300px] rounded-b-xl rounded-tr-xl border border-[#333333] bg-[#0000006b] backdrop-blur-sm -z-[1] opacity-0 absolute top-20 left-10 p-5 transition-all">
                             <div className="w-[100px] h-[100px] rounded-full overflow-hidden mx-auto mb-5">
                                 <Image
-                                    src={"/default.png"}
+                                    src={user?.photoURL}
                                     alt="profile"
                                     width={100}
                                     height={100}
                                 />
                             </div>
                             <div className="w-full text-sm font-light py-2 capitalize">
-                                John Doe
+                                {user?.displayName}
                             </div>
-                           <div className="w-full text-sm font-light py-2 bg-[#3a3a3a42] hover:bg-[#0000003d] border border-[#cacaca] rounded-md capitalize">
+                           <div className="w-full text-sm font-light py-2 bg-[#3a3a3a42] hover:bg-[#0000003d] border border-[#cacaca] rounded-md capitalize" onClick={Logout}>
                                Logout From your account
                            </div>
                         </div>
