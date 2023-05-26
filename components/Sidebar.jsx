@@ -8,8 +8,9 @@ import { auth, db } from "@/firebase";
 import { signOut } from "firebase/auth";
 import Card from "./Card";
 import { useCollection } from "react-firebase-hooks/firestore";
-import { collection } from "firebase/firestore";
+import { collection, query, where } from "firebase/firestore";
 import CardLoader from "./CardLoader";
+import ChatCard from "./chatCard";
 
 const Sidebar = () => {
   const [search, setSearch] = useState("");
@@ -33,6 +34,10 @@ const Sidebar = () => {
 
   const usersRef = collection(db, "users");
   const [userSnapshots, loading] = useCollection(usersRef);
+
+  const chatsRef = collection(db, "chats");
+  const q = query(chatsRef, where("users", "array-contains", currentUser.email));
+  const [chatSnapshots, loading3] = useCollection(chatsRef);
 
   return (
     <div className="w-[40%] h-screen p-5 bg-[#191919]">
@@ -89,8 +94,8 @@ const Sidebar = () => {
       <div
         className={
           search !== ""
-            ? "w-full h-screen transition-all"
-            : "w-full h-0 transition-all overflow-hidden"
+            ? "w-full h-screen overflow-y-auto mt-2 transition-all"
+            : "w-full h-0 transition-all overflow-y-auto mt-2 overflow-hidden"
         }
       >
         {!loading2 ? (
@@ -108,6 +113,8 @@ const Sidebar = () => {
                   user={user}
                   currentUser={currentUser}
                   setSearch={setSearch}
+                  email= {user.data().email}
+                  id= {user.id}
                 />
               );
             }
@@ -119,6 +126,25 @@ const Sidebar = () => {
             <CardLoader />
           </div>
         )}
+      </div>
+      <div className=" w-full h-screen overflow-y-auto mt-2 transition-all">
+            {
+                !loading3 ? (
+                    chatSnapshots?.docs?.map((chat) => {
+                    return (
+                        <ChatCard key={chat.id} chatData={chat}/>
+                    )
+                }
+
+                )
+                ) : (
+                    <div>
+            <CardLoader />
+            <CardLoader />
+            <CardLoader />
+          </div>
+                )
+            }
       </div>
     </div>
   );
