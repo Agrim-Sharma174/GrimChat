@@ -8,7 +8,7 @@ import { auth, db } from "@/firebase";
 import { signOut } from "firebase/auth";
 import Card from "./Card";
 import { useCollection } from "react-firebase-hooks/firestore";
-import { collection, query, where } from "firebase/firestore";
+import { collection, doc, query, serverTimestamp, setDoc, where } from "firebase/firestore";
 import CardLoader from "./CardLoader";
 import ChatCard from "./chatCard";
 
