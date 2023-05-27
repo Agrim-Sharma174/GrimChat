@@ -8,7 +8,14 @@ import { auth, db } from "@/firebase";
 import { signOut } from "firebase/auth";
 import Card from "./Card";
 import { useCollection } from "react-firebase-hooks/firestore";
-import { collection, doc, query, serverTimestamp, setDoc, where } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  query,
+  serverTimestamp,
+  setDoc,
+  where,
+} from "firebase/firestore";
 import CardLoader from "./CardLoader";
 import ChatCard from "./chatCard";
 
@@ -36,7 +43,10 @@ const Sidebar = () => {
   const [userSnapshots, loading] = useCollection(usersRef);
 
   const chatsRef = collection(db, "chats");
-  const q = query(chatsRef, where("users", "array-contains", currentUser.email));
+  const q = query(
+    chatsRef,
+    where("users", "array-contains", currentUser.email)
+  );
   const [chatSnapshots, loading3] = useCollection(chatsRef);
 
   return (
@@ -113,8 +123,8 @@ const Sidebar = () => {
                   user={user}
                   currentUser={currentUser}
                   setSearch={setSearch}
-                  email= {user.data().email}
-                  id= {user.id}
+                  email={user.data().email}
+                  id={user.id}
                 />
               );
             }
@@ -128,23 +138,17 @@ const Sidebar = () => {
         )}
       </div>
       <div className=" w-full h-screen overflow-y-auto mt-2 transition-all">
-            {
-                !loading3 ? (
-                    chatSnapshots?.docs?.map((chat) => {
-                    return (
-                        <ChatCard key={chat.id} chatData={chat}/>
-                    )
-                }
-
-                )
-                ) : (
-                    <div>
+        {!loading3 ? (
+          chatSnapshots?.docs?.map((chat) => {
+            return <ChatCard key={chat.id} chatData={chat} />;
+          })
+        ) : (
+          <div>
             <CardLoader />
             <CardLoader />
             <CardLoader />
           </div>
-                )
-            }
+        )}
       </div>
     </div>
   );
