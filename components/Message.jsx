@@ -47,17 +47,17 @@ const Message = ({ msg }) => {
     .toLocaleString("en-US", {
       hour: "numeric",
       minute: "numeric",
-      hour12: true,
+      hour12: false,
     })
     .slice(0, 5);
+    const date = newDate.toLocaleDateString();
   // console.log(time);
   return (
-    <div className="min-w-[100px] bg-[#ffee32d3] text-black p-2 rounded-b-xl rounded-tr-xl">
-      {message}
-      <div className="w-full text-end">
-        {time} {
-            time >= 12 ? "PM" : "AM"
-        }
+    <div className="min-w-[100px] bg-[#ffee32] text-black p-2 rounded-b-xl rounded-tr-xl">
+    <div className="font-semibold text-lg">{message}</div>
+      
+      <div className="w-full text-end text-xs">
+        {time} hrs. | {date}
       </div>
     </div>
   );

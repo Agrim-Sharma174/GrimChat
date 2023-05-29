@@ -397,7 +397,7 @@ const Id = ({ id, chatData }) => {
   const time = newDate.toLocaleString("en-US", {
     hour: "numeric",
     minute: "numeric",
-    hour12: true,
+    hour12: false,
   });
   const date = newDate.toLocaleDateString();
 
