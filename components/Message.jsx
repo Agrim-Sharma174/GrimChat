@@ -53,7 +53,7 @@ const Message = ({ msg }) => {
     const date = newDate.toLocaleDateString();
   // console.log(time);
   return (
-    <div className="min-w-[100px] bg-[#ffee32] text-black p-2 rounded-b-xl rounded-tr-xl">
+    <div className="min-w-[100px] bg-[#ffee32d3] text-black p-2 rounded-b-xl rounded-tr-xl">
     <div className="font-semibold text-lg">{message}</div>
       
       <div className="w-full text-end text-xs">

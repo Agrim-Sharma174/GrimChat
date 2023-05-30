@@ -67,7 +67,6 @@
 //     time = newDate.toLocaleTimeString().slice(0, 5);
 //     date = newDate.toLocaleDateString();
 //   }
-  
 
 //   return (
 //     <div className="gradient w-full h-screen overflow-hidden">
@@ -128,7 +127,6 @@
 // }
 
 // export default Id;
-
 
 //! UNKA WALA
 // import { useState } from "react";
@@ -265,9 +263,7 @@
 
 // export default Id;
 
-
 //! MERE WALA
-
 
 // return (
 //     <div className="gradient w-full h-screen overflow-hidden">
@@ -418,15 +414,22 @@ const Id = ({ id, chatData }) => {
         <div>
           <div>{name}</div>
           <div>
-            last seen at {time || ""} on {date || ""}
+            {!online ? (
+              <span>
+                last seen at {time || ""} on {date || ""}{" "}
+              </span>
+            ) : (
+              <span className="text-green-400">online</span>
+            )}
           </div>
         </div>
       </div>
-      <div className="w-full h-[74vh] md:h-[75vh] overflow-y-auto overflow-x-hidden p-5">
+      <div className="w-full h-[75vh] overflow-y-auto overflow-x-hidden p-1 md:p-5">
         {messageSnapshots?.docs?.map((msg) => {
           if (msg.data().chatId === id) {
             return (
-              <div key={msg.id}
+              <div
+                key={msg.id}
                 className={
                   msg.data().user === user?.email
                     ? "w-full flex justify-end mb-5"
@@ -439,26 +442,26 @@ const Id = ({ id, chatData }) => {
           }
         })}
       </div>
-      <form
-        onSubmit={createMessage}
-        className="w-full bg-[#00000044] backdrop-blur-sm h-full md:-mt-1"
-      >
-        <div className="flex items-center relative">
-          <input
-            type="text"
-            className="w-full h-14 border pr-10 pl-5 bg-transparent rounded-full outline-none focus:border-[#ffee32]"
-            onChange={(e) => {
-              setMessage(e.target.value);
-            }}
-            value={message}
-            placeholder="Type Here"
-            required
-          />
-          <button className="text-3xl absolute right-4">
-            <MdSend />
-          </button>
-        </div>
-      </form>
+      <div className="w-full bg-[#00000048] h-full">
+        <form onSubmit={createMessage} >
+          {/* backdrop-blur-sm */}
+          <div className="flex items-center relative">
+            <input
+              type="text"
+              className="w-full h-14 border pr-10 pl-5 bg-transparent rounded-full outline-none focus:border-[#ffee32]"
+              onChange={(e) => {
+                setMessage(e.target.value);
+              }}
+              value={message}
+              placeholder="Type Here"
+              required
+            />
+            <button className="text-3xl absolute right-4">
+              <MdSend />
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };

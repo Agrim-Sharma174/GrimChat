@@ -31,31 +31,52 @@
 // };
 
 // export default Login;
-import React from 'react'
-import Logo from '../public/images/logo.png'
-import GoogleLogo from '../public/images/google-logo.png'
-import Image from "next/image"
-import { signInWithPopup } from "firebase/auth"
-import { auth, provider } from '../firebase'
+import React from "react";
+import Logo from "../public/images/logo.png";
+import GoogleLogo from "../public/images/google-logo.png";
+import Image from "next/image";
+import { signInWithPopup } from "firebase/auth";
+import { auth, provider } from "../firebase";
 
 const Login = () => {
-    const login = async () => {
-        await signInWithPopup(auth, provider);
-    }
+  const login = async () => {
+    await signInWithPopup(auth, provider);
+  };
   return (
-    <div className='w-full h-screen overflow-hidden bg-[#252525] flex justify-center items-center flex-col space-y-10'>
-        <div className='flex items-center space-x-4'>
-            <Image src={Logo} width={100} height={100} priority={true} quality={100} alt="" />
-            <h1 className='text-5xl font-bold'>GrimChat</h1>
+    <div className="w-full h-screen overflow-hidden bg-[#252525] flex justify-center items-center flex-col space-y-10 relative">
+      <Image src={"/gifs/landing.gif"} layout="fill" objectFit="cover" />
+      <div className="absolute bottom-0 w-[95%] h-[auto] md:w-[40%] backdrop-blur-xl rounded-xl text-black p-5">
+        <div className="flex items-center space-x-4 justify-center">
+          <Image
+            src={Logo}
+            width={100}
+            height={100}
+            priority={true}
+            quality={100}
+            alt=""
+            className="rounded-xl"
+          />
+          <h1 className="text-5xl font-bold ">GrimChat</h1>
         </div>
-        <div>
-            <button className='flex items-center text-xl bg-white text-black px-5 py-2 rounded-md hover:bg-[#e2e2e2] transition-colors font-semibold space-x-3' onClick={login}>
-            <Image src={GoogleLogo} width={30} height={30} priority={true} quality={100} alt="" />
+        <div className="mt-10 flex items-center justify-center">
+          <button
+            className="flex items-center text-xl bg-white text-black px-5 py-2 rounded-md hover:bg-[#e2e2e2] transition-colors font-semibold space-x-3"
+            onClick={login}
+          >
+            <Image
+              src={GoogleLogo}
+              width={30}
+              height={30}
+              priority={true}
+              quality={100}
+              alt=""
+            />
             <span>Login With google</span>
-            </button>
+          </button>
         </div>
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;
