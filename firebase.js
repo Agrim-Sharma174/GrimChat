@@ -6,12 +6,13 @@ import { getStorage } from "firebase/storage";
 // dotenv.config();
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBrBUBvMzpnowsFEMq0Ti1AG7Rpkl00FoQ",
-  authDomain: "agrim-chat.firebaseapp.com",
-  projectId: "agrim-chat",
-  storageBucket: "agrim-chat.appspot.com",
-  messagingSenderId: "173097816538",
-  appId: "1:173097816538:web:11b69ccad9a2e2cb5770e3",
+  apiKey: "AIzaSyC5YhwwJ-yMAgA5fsrqhGDIKg69imrnXJQ",
+  authDomain: "grim--chat.firebaseapp.com",
+  projectId: "grim--chat",
+  storageBucket: "grim--chat.appspot.com",
+  messagingSenderId: "377915894274",
+  appId: "1:377915894274:web:af0c25947e2e053729551b",
+  measurementId: "G-5E1HXX8C2H"
 };
 
 let app;

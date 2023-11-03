@@ -45,7 +45,7 @@ const Login = () => {
   return (
     <div className="w-full h-screen overflow-hidden bg-[#252525] flex justify-center items-center flex-col space-y-10 relative">
       <Image src={"/gifs/landing.gif"} layout="fill" objectFit="cover" />
-      <div className="absolute bottom-10 w-[95%] h-[auto] md:w-[40%] backdrop-blur-xl rounded-xl text-black p-5">
+      <div className="absolute bottom-12 md:bottom-5 w-[95%] h-[auto] md:w-[40%] backdrop-blur-xl rounded-xl text-black p-5">
         <div className="flex items-center space-x-4 justify-center">
           <Image
             src={Logo}
